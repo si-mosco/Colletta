@@ -21,13 +21,21 @@ namespace Colletta
         }
 
         Dictionary<string, double> colletta = new Dictionary<string, double>();
+        Dictionary<Persona, Soldi> collette = new Dictionary<Persona, Soldi>();
+        Persona temp;
+        Soldi tempino;
+
         string[] alunni = new string[] { "Bassi", "Borelli", "Colombi", "Crotti", "Cutinella", "Ferrari", "Ghilardi A.", "Ghilardi N.", "Ghirardi", "Lin", "Manca", "Mensah", "Messi", "Mosconi", "Panseri", "Patelli", "Rossi", "Todeschini", "Verzeri", "Vita" };
         double SaldoTot = 0;
 
         private void Form1_Load(object sender, EventArgs e)
-        {           
+        {
             for (int i = 0; i < alunni.Length; i++)
-                colletta.Add(alunni[i], 0);
+            {
+                temp = new Persona(alunni[i]);
+                tempino = new Soldi(0, "euri");
+                collette.Add(temp, tempino);
+            }
 
             listView1.Items.Clear();
             listView1.View = View.Details;
@@ -38,7 +46,7 @@ namespace Colletta
 
         public void Reload_ListView()
         {
-            foreach (KeyValuePair<string, double> kvp in colletta)
+            foreach (KeyValuePair<Persona, Soldi> kvp in collette)
             {
                 string[] val = new string[] { kvp.Key, Convert.ToString(kvp.Value) };
 
@@ -63,6 +71,7 @@ namespace Colletta
 
                     if (ver)
                     {
+
                         colletta[textBox1.Text]+=quota;
                     }
                     else
