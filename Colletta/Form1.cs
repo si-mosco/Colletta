@@ -48,7 +48,7 @@ namespace Colletta
         {
             foreach (KeyValuePair<Persona, Soldi> kvp in collette)
             {
-                string[] val = new string[] { kvp.Key, Convert.ToString(kvp.Value) };
+                string[] val = new string[] { Convert.ToString(kvp.Key.Nome), Convert.ToString(kvp.Value.Importo) };
 
                 ListViewItem item = new ListViewItem(val);
                 listView1.Items.Add(item);
@@ -71,8 +71,10 @@ namespace Colletta
 
                     if (ver)
                     {
-
-                        colletta[textBox1.Text]+=quota;
+                        temp = new Persona(textBox1.Text);
+                        tempino = collette[temp];
+                        tempino = new Soldi(tempino.Importo + quota, "€");
+                        collette[temp]=tempino;
                     }
                     else
                     {
@@ -111,8 +113,14 @@ namespace Colletta
 
                     if (ver)
                     {
-                        if (colletta[textBox1.Text] >= quota)
-                            colletta[textBox1.Text] -= quota;
+                        temp = new Persona(textBox1.Text);
+                        tempino = collette[temp];
+
+                        if (collette[temp].Importo >= quota)
+                        {
+                            tempino = new Soldi(tempino.Importo - quota, "€");
+                            collette[temp] = tempino;
+                        }
                         else
                             throw new Exception("Valore troppo alto");
                     }

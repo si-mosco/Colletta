@@ -9,7 +9,7 @@ namespace Colletta
     public class Persona
     {
         private string Id { get; set; }
-        private string Nome { get; set; }
+        public string Nome { get; set; }
 
         public Persona(string nome)
         {

@@ -9,8 +9,8 @@ namespace Colletta
     public class Soldi
     {
         private string Id { get; set; }
-        private double Importo { get; set; }
-        private string Valuta { get; set; }
+        public double Importo { get; set; }
+        public string Valuta { get; set; }
 
         public Soldi(double importo, string valuta)
         {
