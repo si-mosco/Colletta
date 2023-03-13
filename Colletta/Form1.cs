@@ -20,7 +20,6 @@ namespace Colletta
             listView1.Columns.Add("Saldo", 100);
         }
 
-        Dictionary<string, double> colletta = new Dictionary<string, double>();
         Dictionary<Persona, Soldi> collette = new Dictionary<Persona, Soldi>();
         Persona temp;
         Soldi tempino;
@@ -100,7 +99,7 @@ namespace Colletta
                 throw new Exception("Inserire Valori");
         }
 
-        private void button2_Click(object sender, EventArgs e)//trogli
+        private void button2_Click(object sender, EventArgs e)//togli
         {
             if (!String.IsNullOrWhiteSpace(textBox1.Text) || !String.IsNullOrWhiteSpace(textBox2.Text))
             {
@@ -147,6 +146,24 @@ namespace Colletta
             }
             else
                 throw new Exception("Inserire Valori");
+        }
+
+        private void button3_Click(object sender, EventArgs e) //ordina per nome
+        {
+            SortedDictionary<Persona, Soldi> temprino = new SortedDictionary<Persona, Soldi>(collette);
+            collette = new Dictionary<Persona, Soldi>(temprino);
+
+            listView1.Items.Clear();
+            Reload_ListView();
+        }
+
+        private void button4_Click(object sender, EventArgs e) // ordina per importo
+        {
+            SortedDictionary<Persona, Soldi> temprino = new SortedDictionary<Persona, Soldi>(collette);
+            collette = new Dictionary<Persona, Soldi>(temprino);
+
+            listView1.Items.Clear();
+            Reload_ListView();
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Colletta
 {
-    public class Soldi
+    public class Soldi : IComparable<Soldi>
     {
         private string Id { get; set; }
         public double Importo { get; set; }
@@ -36,6 +36,10 @@ namespace Colletta
         public override int GetHashCode()
         {
             return (Id, Importo, Valuta).GetHashCode();
+        }
+        public int CompareTo(Soldi other)
+        {
+            return Importo.CompareTo(other.Importo);
         }
     }
 }
