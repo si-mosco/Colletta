@@ -31,6 +31,11 @@ namespace Colletta
             return (this.Id == p.Id);
         }
 
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Persona);
+        }
+
         public override int GetHashCode()
         {
             return (Id, Nome).GetHashCode();

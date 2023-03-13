@@ -73,7 +73,8 @@ namespace Colletta
                     {
                         temp = new Persona(textBox1.Text);
                         tempino = collette[temp];
-                        tempino = new Soldi(tempino.Importo + quota, "€");
+                        double oldimp = tempino.Importo;
+                        tempino = new Soldi(oldimp + quota, "€");
                         collette[temp]=tempino;
                     }
                     else
@@ -115,8 +116,9 @@ namespace Colletta
                     {
                         temp = new Persona(textBox1.Text);
                         tempino = collette[temp];
+                        double oldimp = tempino.Importo;
 
-                        if (collette[temp].Importo >= quota)
+                        if (oldimp >= quota)
                         {
                             tempino = new Soldi(tempino.Importo - quota, "€");
                             collette[temp] = tempino;
