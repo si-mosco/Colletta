@@ -159,11 +159,47 @@ namespace Colletta
 
         private void button4_Click(object sender, EventArgs e) // ordina per importo
         {
-            SortedDictionary<Persona, Soldi> temprino = new SortedDictionary<Persona, Soldi>(collette);
-            collette = new Dictionary<Persona, Soldi>(temprino);
+            Dictionary<Persona, Soldi> tmp = new Dictionary<Persona, Soldi>();
+
+            foreach (KeyValuePair<Persona, Soldi> val in collette.OrderByDescending(x => x.Value.Importo))
+            {
+                tmp[val.Key] = val.Value;
+            }
+            collette = new Dictionary<Persona, Soldi>(tmp);
 
             listView1.Items.Clear();
             Reload_ListView();
+        }
+
+        private void button5_Click(object sender, EventArgs e) //ricerca x importo
+        {
+            if (String.IsNullOrWhiteSpace(textBox3.Text) || String.IsNullOrWhiteSpace(textBox3.Text))
+            {
+                MessageBox.Show("Valore non valido");
+                return;
+            }
+
+            try
+            {
+                double valore = double.Parse(textBox3.Text);
+                foreach (KeyValuePair<Persona, Soldi> val in collette)
+                {
+                    double importoPersona = val.Value.Importo;
+
+                    if (valore == importoPersona)
+                    {
+                        MessageBox.Show($"L'utente che ha versato questo importo è: {val.Key.Nome}");
+                        return;
+                    }
+                }
+                MessageBox.Show("Nessun utente trovato");
+            }
+            catch
+            {
+                MessageBox.Show("Valore non valido");
+                return;
+            }
+
         }
     }
 }
